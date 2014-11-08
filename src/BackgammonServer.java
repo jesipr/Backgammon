@@ -676,6 +676,7 @@ class Game {
 							// with the array of dice
 							// and get the user mark to know which array trail
 							// to use. Send this locations to the output.
+							
 							if (this.mark == 'W') {
 								for (int i = 0; i < diceOptions.size(); i++) {
 									for (int j = 0; j < whiteTrail.length; j++) { 
