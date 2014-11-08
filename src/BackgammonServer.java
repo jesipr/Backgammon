@@ -261,7 +261,7 @@ class Game {
 			if(numberOfPieces[6]>0) return true;
 		}else if(player.mark=='B' && player == currentPlayer)  {
 			if(numberOfPieces[19]>0) return true;
-			
+
 		}
 		return false;
 	}
@@ -585,11 +585,14 @@ class Game {
 						if (legalDiceTurn(this)) {
 							if (diceOptions.size() == 0) {
 								rollDice();
-								if (!anyMoveLeft(this) && anyMoveInBar(this)) {
-									this.output.println("NO_MOVES");
-									this.opponent.output.println("OPPONENT_NO_MOVES");
-									changeTurn(this);
+								if(!houseCondition(this)){
+									if (!anyMoveLeft(this) && anyMoveInBar(this)) {
+										this.output.println("NO_MOVES");
+										this.opponent.output.println("OPPONENT_NO_MOVES");
+										changeTurn(this);
+									}
 								}
+
 							}
 
 							else
@@ -661,8 +664,8 @@ class Game {
 
 							}
 						}
-						
-						
+
+
 
 						else if (legalPieceSelection(location, this)) {
 							if(houseCondition(this)){
@@ -676,7 +679,7 @@ class Game {
 							// with the array of dice
 							// and get the user mark to know which array trail
 							// to use. Send this locations to the output.
-							
+
 							if (this.mark == 'W') {
 								for (int i = 0; i < diceOptions.size(); i++) {
 									for (int j = 0; j < whiteTrail.length; j++) { 
