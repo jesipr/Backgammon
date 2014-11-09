@@ -322,7 +322,7 @@ class Game {
 				}
 			}
 			if(count==0){
-				possibleMoves.add(27);
+				possibleMoves.add(26);
 			}
 
 			String temp = "POSSIBLE_MOVES ";
