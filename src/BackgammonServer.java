@@ -800,6 +800,13 @@ class Game {
 							output.println("VALID_DISCHARGE " + pieceSelectedPos );
 							this.opponent.output.println("OPPONENT_VALID_DISCHARGE " + pieceSelectedPos);
 						}
+					}else if(command.startsWith("WIN")){
+						output.println("YOU_WIN");
+						this.opponent.output.println("OPPONENT_WIN");
+					}
+					else if(command.startsWith("WIN_GAME")){
+						output.println("WIN_GAME");
+						this.opponent.output.println("OPPONENT_WIN_GAME");
 					}
 				}
 			} catch (IOException e) {
