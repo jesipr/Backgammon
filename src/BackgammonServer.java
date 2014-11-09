@@ -288,7 +288,9 @@ class Game {
 	}
 
 	/**
-	 * Called after checking for house condition
+	 * Called after checking for house condition. 
+	 * This return the possible moves to the player
+	 * that has the turn.
 	 * 
 	 * @param player
 	 * @param location
