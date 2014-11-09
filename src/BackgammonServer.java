@@ -114,6 +114,7 @@ class Game {
 	 * The current player state.
 	 */
 	Player currentPlayer;
+	
 	/**
 	 * Indicates the position of the selected piece.
 	 */
@@ -385,7 +386,7 @@ class Game {
 	 * @param player
 	 * @return
 	 */
-	public boolean anyMoveInBar(Player player){ //VERIFICAR CAMBIE LOS diceOptions.get(i)+1 por diceOptions.get(i)-1
+	public boolean anyMoveInBar(Player player){
 		if(player.mark=='W'){
 			for(int i = 0; i<diceOptions.size(); i++){
 				for(int j = 0; j<6;j++){
@@ -448,7 +449,6 @@ class Game {
 		Socket socket;
 		BufferedReader input;
 		PrintWriter output;
-		int house = 0; // Para editar luego
 
 		/**
 		 * Constructs a handler thread for a given socket and mark initializes
@@ -482,7 +482,7 @@ class Game {
 		public void rollDice() {
 			int ans1 = rand.nextInt(6) + 1;
 			int ans2 = rand.nextInt(6) + 1;
-			diceOptions.clear(); // Don't know if I should call this here.
+			diceOptions.clear();
 			if (ans1 == ans2) {
 				output.println("VALID_ROLL " + ans1 + "" + ans1 + "" + ans1+ "" + ans1);
 				this.opponent.output.println("OPPONENT_ROLL " + ans1 + ""+ ans1 + "" + ans1 + "" + ans1);
@@ -585,6 +585,44 @@ class Game {
 				changeTurn(this);
 			}
 
+		}
+		
+		public void removeDischargeRoll(int location){
+			if(this.mark=='W'){
+				for(int i=0;i<diceOptions.size();i++){
+					if(whiteTrail[24-diceOptions.get(i)]==location){
+						diceOptions.remove(i);
+						break;
+					}
+				}
+			}else if(this.mark=='B'){
+				for(int i=0;i<diceOptions.size();i++){
+					if(blackTrail[24-diceOptions.get(i)]==location){
+						diceOptions.remove(i);
+						break;
+					}
+				}
+			}
+			String temp="";
+			for (int i = 0; i < diceOptions.size(); i++) {
+				temp = temp + diceOptions.get(i);
+			}
+			
+			if (temp.length() == 1) {
+				output.println("VALID_ROLL " + temp + "000");
+				this.opponent.output.println("OPPONENT_ROLL " + temp + "000");
+			} else if (temp.length() == 2) {
+				output.println("VALID_ROLL " + temp + "00");
+				this.opponent.output.println("OPPONENT_ROLL " + temp + "00");
+			} else if (temp.length() == 3) {
+				output.println("VALID_ROLL " + temp + "0");
+				this.opponent.output.println("OPPONENT_ROLL " + temp + "0");
+			} else {
+				output.println("VALID_ROLL 0000");
+				this.opponent.output.println("OPPONENT_ROLL 0000");
+
+				changeTurn(this);
+			}
 		}
 
 		/**
@@ -786,7 +824,7 @@ class Game {
 								output.println(temp);
 							}
 							output.println("VALID_SELECT");
-						} else if(incorrectPiece(location,this)){//Check if it chose a opponent dice.
+						} else if(incorrectPiece(location,this)){ //Check if it chose a opponent dice.
 							output.println("MESSAGE Choose a correct piece!");
 						}else{
 							output.println("MESSAGE Not your turn, wait for opponnent");
@@ -813,10 +851,14 @@ class Game {
 							if(numberOfPieces[pieceSelectedPos]==0){
 								board[pieceSelectedPos]=null;
 							}
+							//Update roll missing
+							removeDischargeRoll(pieceSelectedPos);
 						}
 					}else if(command.startsWith("WIN")){
 						output.println("YOU_WIN");
 						this.opponent.output.println("OPPONENT_WIN");
+						initGameBoard();
+						
 					}
 					else if(command.startsWith("WIN_GAME")){
 						output.println("WIN_GAME");
@@ -834,4 +876,5 @@ class Game {
 			}
 		}
 	}
+
 }
