@@ -277,11 +277,11 @@ class Game {
 	public boolean houseCondition(Player player){
 		if(player.mark=='W'){
 			for(int i = 0; i<18;i++){
-				if(board[whiteTrail[i]]==player || numberOfPieces[6] > 1) return false;
+				if(board[whiteTrail[i]]==player || numberOfPieces[6] > 0) return false;
 			}
 		}else{
 			for(int i = 0; i<18;i++){
-				if(board[blackTrail[i]]==player || numberOfPieces[19] > 1) return false;
+				if(board[blackTrail[i]]==player || numberOfPieces[19] > 0) return false;
 			}
 		}
 		return true;
