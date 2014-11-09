@@ -791,8 +791,15 @@ class Game {
 						} else {
 							output.println("MESSAGE ?");
 						}
+						
 					} else if (command.startsWith("QUIT")) {
 						return;
+					}
+					else if(command.startsWith("DISCHARGE")){
+						if(legalDiceTurn(this)){
+							output.println("VALID_DISCHARGE " + pieceSelectedPos );
+							this.opponent.output.println("OPPONENT_VALID_DISCHARGE " + pieceSelectedPos);
+						}
 					}
 				}
 			} catch (IOException e) {
