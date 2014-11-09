@@ -23,6 +23,14 @@ public class RHListener implements MouseListener {
 			CheckerListener.tempSelected = "";
 			BoardViewer.removeBorderButtons();
 		}
+		if(BoardHouse.hB == 15 || BoardHouse.hW == 15){
+			
+			BoardClient.out.println("WIN");
+			BoardHouse.hB = 0;
+			BoardHouse.hW = 0;
+
+		}
+		
 	}
 
 	@Override

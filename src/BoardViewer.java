@@ -59,8 +59,8 @@ public class BoardViewer extends JPanel {
 			}
 		}
 	}
-	
-	public static void resetDices(){
+
+	public static void resetDices() {
 		BoardHouse.house[1].setIcon(BoardHouse.diceImg[0]);
 		BoardHouse.house[2].setIcon(BoardHouse.diceImg[0]);
 		BoardHouse.house[4].setIcon(BoardHouse.diceImg[0]);
@@ -113,7 +113,8 @@ public class BoardViewer extends JPanel {
 					pieces[i].setIcon(null);
 					pieces[i].setColor(B);
 					pieces[i].setStoneNum(0);
-				} else pieces[i].setColor("");
+				} else
+					pieces[i].setColor("");
 			}
 		}
 
@@ -125,7 +126,55 @@ public class BoardViewer extends JPanel {
 
 		}
 	}
-	
+
+	static void resetButtons() {
+		for (int i = 0; i < 26; i++) {
+
+			if (i == 0 || i == 12 || i == 17 || i == 20) {
+				pieces[i].setColor(W);
+				if (i == 0) {
+					pieces[i].setIcon(uPW[5]);
+					pieces[i].setStoneNum(5);
+				} else if (i == 12) {
+					pieces[i].setIcon(uPW[2]);
+					pieces[i].setStoneNum(2);
+				} else if (i == 17) {
+					pieces[i].setIcon(lPW[3]);
+					pieces[i].setStoneNum(3);
+				} else if (i == 20) {
+					pieces[i].setIcon(lPW[5]);
+					pieces[i].setStoneNum(5);
+				}
+			} else if (i == 4 || i == 7 || i == 13 || i == 25) {
+				pieces[i].setColor(B);
+				if (i == 4) {
+					pieces[i].setIcon(uPB[3]);
+					pieces[i].setStoneNum(3);
+				} else if (i == 7) {
+					pieces[i].setIcon(uPB[5]);
+					pieces[i].setStoneNum(5);
+				} else if (i == 13) {
+					pieces[i].setIcon(lPB[5]);
+					pieces[i].setStoneNum(5);
+				} else if (i == 25) {
+					pieces[i].setIcon(lPB[2]);
+					pieces[i].setStoneNum(2);
+				}
+			} else {
+				if (i == 6) {
+					pieces[i].setIcon(null);
+					pieces[i].setColor(W);
+					pieces[i].setStoneNum(0);
+				} else if (i == 19) {
+					pieces[i].setIcon(null);
+					pieces[i].setColor(B);
+					pieces[i].setStoneNum(0);
+				} else
+					pieces[i].setColor("");
+			}
+		}
+	}
+
 	static void removeBorderButtons() {
 		for (int i = 0; i < 26; i++) {
 			pieces[i].setBorderPainted(false);

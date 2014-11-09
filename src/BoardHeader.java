@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 class BoardHeader extends JLabel {
 
-	private static int score1 = 0, score2 = 0;
+	public static int score1 = 0, score2 = 0;
 
 	/**
 		 * 
@@ -32,7 +32,7 @@ class BoardHeader extends JLabel {
 	public void updateScore(int s1, int s2) {
 		score1 = s1;
 		score2 = s2;
-		setText("Player 1:" + score1 + " pts" + "  Player 2:" + score2 + " pts");
+		
 	}
 	
 }

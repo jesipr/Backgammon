@@ -32,7 +32,7 @@ public class BoardClient {
 		menuBar.add(gameOptions);
 
 		frame.setLayout(new BorderLayout());
-		frame.add(new BoardHeader(), BorderLayout.NORTH);
+		frame.add(bH, BorderLayout.NORTH);
 		frame.add(new BoardViewer(), BorderLayout.CENTER);
 		frame.add(bS, BorderLayout.SOUTH);
 		frame.add(new BoardHouse(), BorderLayout.EAST);
@@ -48,7 +48,7 @@ public class BoardClient {
 
 	private static JFrame frame;
 	static Socket s;
-
+	static BoardHeader bH = new BoardHeader();
 	static BufferedReader in;
 	static PrintWriter out;
 	static int[] rollN = new int[4];
@@ -86,10 +86,35 @@ public class BoardClient {
 				// opponentIcon = new ImageIcon(mark == 'X' ? "o.gif" :
 				// "x.gif");
 				frame.setTitle("Backgammon - Player " + mark);
+
+				if (mark == 'W') {
+					Object[] possibilities = { "1", "2", "3", "4" };
+					String s = (String) JOptionPane.showInputDialog(frame, "",
+							"Points to win the game",
+							JOptionPane.PLAIN_MESSAGE, new ImageIcon(
+									"src/no_moves.png"), possibilities, "1");
+
+					// If a string was returned, say so.
+					if ((s != null) && (s.length() > 0)) {
+						BoardHouse.mP = Integer.parseInt(s);
+						System.out.println("Maximum: " + s);
+					} else {
+						s = "1";
+						BoardHouse.mP = Integer.parseInt(s);
+						System.out.println("Maximum: " + s);
+
+					}
+
+				}
+
 			}
 			while (true) {
 
 				response = in.readLine();
+				if (response.equals(null)) {
+					System.out.println("RESPONSE NULL");
+				}
+
 				System.out.println(response);
 				if (response.startsWith("VALID_ROLL")) {
 					String temp = response.substring(11);
@@ -125,7 +150,7 @@ public class BoardClient {
 									.toString(posMov.charAt(i)));
 						} else {
 							BoardClient.posMov
-							.add(Integer.parseInt(tempPosMov));
+									.add(Integer.parseInt(tempPosMov));
 							tempPosMov = "";
 						}
 					}
@@ -198,10 +223,10 @@ public class BoardClient {
 					if (!(BoardViewer.pieces[opMovesInt.get(0)].getColor()
 							.equals(BoardViewer.pieces[opMovesInt.get(1)]
 									.getColor()))
-									&& !(BoardViewer.pieces[opMovesInt.get(0)]
-											.getColor().equals(""))
-											&& !(BoardViewer.pieces[opMovesInt.get(1)]
-													.getColor().equals(""))) {
+							&& !(BoardViewer.pieces[opMovesInt.get(0)]
+									.getColor().equals(""))
+							&& !(BoardViewer.pieces[opMovesInt.get(1)]
+									.getColor().equals(""))) {
 
 						if (BoardViewer.pieces[opMovesInt.get(1)].getColor()
 								.equals("black")) {
@@ -254,6 +279,39 @@ public class BoardClient {
 							.setStoneNum(BoardViewer.pieces[from].getStoneNum() - 1);
 					BoardViewer.repaintButtons();
 
+				} else if (response.startsWith("YOU_WIN")) {     
+					bH.updateScore(BoardHeader.score1++, 0);	// El Servidor recibe comando: "WIN", el cliente debe recibir un comando "YOU_WIN"//
+					bH.setText("Player 1:" + BoardHeader.score1 + " pts"  //Al igual que un comando: "OPPONENT_WIN" //
+							+ "  Player 2:" + BoardHeader.score2 + " pts");
+					BoardViewer.removeBorderButtons();
+					BoardViewer.resetDices();
+					BoardViewer.resetButtons();
+					if (BoardHeader.score1 == BoardHouse.mP) { //MAXIMUM POINTS, solo verifico el score1 porque ese es el que importa cuando va a ganar la totalidad
+						BoardClient.out.println("WIN_GAME");   // del juego. Si gana te envie un WIN_GAME, LEER MAS ABAJO EL OTRO COMENTARIO>>>>>//
+					}
+
+				} else if (response.startsWith("OPPONENT_WIN")) {
+					bH.updateScore(0, BoardHeader.score2++);
+					bH.setText("Player 1:" + BoardHeader.score1 + " pts"
+							+ "  Player 2:" + BoardHeader.score2 + " pts");
+					BoardViewer.removeBorderButtons();
+					BoardViewer.resetDices();
+					BoardViewer.resetButtons();
+					
+				} else if(response.startsWith("WIN_GAME")){   // El servidor recibe un comando : "WIN_GAME" significa que el jugador gano la totalidad de los puntos//
+					JOptionPane.showMessageDialog(frame, "Congratulations! You Won!",  // El Servidor me envia un comando de "WIN_GAME" y "OPPONENT_WIN_GAME"//
+							"!!!!!!!!", JOptionPane.INFORMATION_MESSAGE,
+							new ImageIcon("src/no_moves.png"));
+					frame.dispose();
+					s.close();
+					
+				} else if(response.startsWith("OPPONENT_WIN_GAME")){
+					JOptionPane.showMessageDialog(frame, "You Lose!",
+							":(", JOptionPane.INFORMATION_MESSAGE,
+							new ImageIcon("src/no_moves.png"));
+					frame.dispose();
+					s.close();
+					
 				}
 
 			}

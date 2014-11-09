@@ -17,7 +17,7 @@ public class BoardHouse extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static int hB, hW;
+	public static int hB, hW, mP;
 	public static JButton[] house = new JButton[7];
 	private final String[] COLOR = { "WHITE", "BLACK" };
 	public static final ImageIcon[] diceImg = new ImageIcon[7];

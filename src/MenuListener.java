@@ -13,7 +13,7 @@ public class MenuListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem m = (JMenuItem) e.getSource();
 		if(m.getText().equals("GIVE UP")){
-			//BoardClient.out.println("GIVE_UP");
+			BoardClient.out.println("GIVE_UP");
 			
 			JOptionPane.showMessageDialog(BoardClient.getFrame(),
 				    "You Lose!",
@@ -31,7 +31,7 @@ public class MenuListener implements ActionListener {
 			}
 			System.out.println("GIVE UP");
 		}	else if(m.getText().equals("QUIT")){
-			//BoardClient.out.println("QUIT");
+			BoardClient.out.println("QUIT");
 			System.out.println("QUIT");
 		}
 	}
