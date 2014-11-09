@@ -327,11 +327,9 @@ class Game {
 				for(int j = 18;j<blackTrail.length;j++){
 					if (j + diceOptions.get(i) < 24){
 						if(blackTrail[j]==location){
-
 							if(board[blackTrail[j+diceOptions.get(i)]]==null) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
 							else if(board[blackTrail[j+diceOptions.get(i)]]==player && numberOfPieces[blackTrail[j+diceOptions.get(i)]]<5) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
 							else if(board[blackTrail[j+diceOptions.get(i)]]==player.opponent && numberOfPieces[blackTrail[j+diceOptions.get(i)]]==1) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
-
 						}
 					}
 				}
