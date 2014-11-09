@@ -316,13 +316,16 @@ class Game {
 			}
 			int k = 18;
 			int count=0;
+			boolean enter = false;
 			while(whiteTrail[k]<location){
 				if(board[whiteTrail[k]]==player){
 					count++;
+					
 				}
 				k++;
+				enter = true;
 			}
-			if(count==0){
+			if(count==0 && enter){
 				possibleMoves.add(26);
 			}
 
@@ -353,13 +356,15 @@ class Game {
 			}
 			int k = 18;
 			int count=0;
+			boolean enter = false;
 			while(blackTrail[k]<location){
 				if(board[blackTrail[k]]==player){
 					count++;
 				}
 				k++;
+				enter = true;
 			}
-			if(count==0){
+			if(count==0&&enter){
 				possibleMoves.add(27);
 			}
 
