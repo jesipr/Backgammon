@@ -320,6 +320,7 @@ class Game {
 				if(board[whiteTrail[k]]==player){
 					count++;
 				}
+				k++;
 			}
 			if(count==0){
 				possibleMoves.add(26);
@@ -356,6 +357,7 @@ class Game {
 				if(board[blackTrail[k]]==player){
 					count++;
 				}
+				k++;
 			}
 			if(count==0){
 				possibleMoves.add(27);
@@ -685,6 +687,7 @@ class Game {
 								houseConditionMoves(this,location);
 								continue;
 							}
+
 							pieceSelectedPos = location;
 							alreadySelect = true;
 
