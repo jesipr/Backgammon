@@ -299,27 +299,22 @@ class Game {
 		if(player.mark=='W'){
 			for(int i=0;i<diceOptions.size();i++){
 				for(int j = 18;j<whiteTrail.length;j++){
-					try{
+					if (j + diceOptions.get(i) < 24){
 						if(whiteTrail[j]==location){
+
 							if(board[whiteTrail[j+diceOptions.get(i)]]==null) possibleMoves.add(whiteTrail[j+diceOptions.get(i)]);
 							else if(board[whiteTrail[j+diceOptions.get(i)]]==player && numberOfPieces[whiteTrail[j+diceOptions.get(i)]]<5) possibleMoves.add(whiteTrail[j+diceOptions.get(i)]);
 							else if(board[whiteTrail[j+diceOptions.get(i)]]==player.opponent && numberOfPieces[whiteTrail[j+diceOptions.get(i)]]==1) possibleMoves.add(whiteTrail[j+diceOptions.get(i)]);
-						}
-					}catch(RuntimeException e){
-						int count = 0;
-						for(int k = 18;k<whiteTrail.length;k++){
-							if(whiteTrail[k]<location && board[whiteTrail[k]]==player ){
-								count++;
-							}
-						}
-						if (count==0){
-							possibleMoves.add(26);
-						}
 
+						}
 					}
+				}
+				if(whiteTrail[24-diceOptions.get(i)]==location){
+					possibleMoves.add(26);
 				}
 
 			}
+
 			String temp = "POSSIBLE_MOVES ";
 			for (int i = 0; i < possibleMoves.size(); i++) {
 				temp = temp.concat(Integer
@@ -330,34 +325,30 @@ class Game {
 		}else{
 			for(int i=0;i<diceOptions.size();i++){
 				for(int j = 18;j<blackTrail.length;j++){
-					try{
+					if (j + diceOptions.get(i) < 24){
 						if(blackTrail[j]==location){
+
 							if(board[blackTrail[j+diceOptions.get(i)]]==null) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
 							else if(board[blackTrail[j+diceOptions.get(i)]]==player && numberOfPieces[blackTrail[j+diceOptions.get(i)]]<5) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
 							else if(board[blackTrail[j+diceOptions.get(i)]]==player.opponent && numberOfPieces[blackTrail[j+diceOptions.get(i)]]==1) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
-						}
-					}catch(RuntimeException e){
-						int count = 0;
-						for(int k = 18;k<blackTrail.length;k++){
-							if(blackTrail[k]<location && board[blackTrail[k]]==player ){
-								count++;
-							}
-						}
-						if (count==0){
-							possibleMoves.add(27);
-						}
 
+						}
 					}
 				}
+				if(blackTrail[24-diceOptions.get(i)]==location){
+					possibleMoves.add(26);
+				}
+
 			}
+
+			String temp = "POSSIBLE_MOVES ";
+			for (int i = 0; i < possibleMoves.size(); i++) {
+				temp = temp.concat(Integer
+						.toString(possibleMoves.get(i))
+						+ ",");
+			}
+			player.output.println(temp);
 		}
-		String temp = "POSSIBLE_MOVES ";
-		for (int i = 0; i < possibleMoves.size(); i++) {
-			temp = temp.concat(Integer
-					.toString(possibleMoves.get(i))
-					+ ",");
-		}
-		player.output.println(temp);
 	}
 
 	/**
