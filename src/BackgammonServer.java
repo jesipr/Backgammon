@@ -314,6 +314,16 @@ class Game {
 				}
 
 			}
+			int k = 18;
+			int count=0;
+			while(whiteTrail[k]<location){
+				if(board[whiteTrail[k]]==player){
+					count++;
+				}
+			}
+			if(count==0){
+				possibleMoves.add(27);
+			}
 
 			String temp = "POSSIBLE_MOVES ";
 			for (int i = 0; i < possibleMoves.size(); i++) {
@@ -330,6 +340,7 @@ class Game {
 							if(board[blackTrail[j+diceOptions.get(i)]]==null) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
 							else if(board[blackTrail[j+diceOptions.get(i)]]==player && numberOfPieces[blackTrail[j+diceOptions.get(i)]]<5) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
 							else if(board[blackTrail[j+diceOptions.get(i)]]==player.opponent && numberOfPieces[blackTrail[j+diceOptions.get(i)]]==1) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
+
 						}
 					}
 				}
@@ -337,6 +348,17 @@ class Game {
 					possibleMoves.add(27);
 				}
 
+
+			}
+			int k = 18;
+			int count=0;
+			while(blackTrail[k]<location){
+				if(board[blackTrail[k]]==player){
+					count++;
+				}
+			}
+			if(count==0){
+				possibleMoves.add(27);
 			}
 
 			String temp = "POSSIBLE_MOVES ";
