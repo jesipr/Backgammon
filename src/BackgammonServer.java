@@ -423,8 +423,10 @@ class Game {
 	 */
 	public synchronized void changeTurn(Player player) {
 		diceOptions.clear();
+		currentPlayer.output.println("VALID_ROLL 0000");
 		currentPlayer.output.println("MESSAGE Opponent turn, please wait");
 		currentPlayer = player.opponent;
+		currentPlayer.output.println("VALID_ROLL 0000");
 		currentPlayer.output.println("MESSAGE Your turn, roll dices");
 	}
 
@@ -800,8 +802,12 @@ class Game {
 					}
 					else if(command.startsWith("DISCHARGE")){
 						if(legalDiceTurn(this)){
-							output.println("VALID_DISCHARGE " + pieceSelectedPos );
+							this.output.println("VALID_DISCHARGE " + pieceSelectedPos );
 							this.opponent.output.println("OPPONENT_VALID_DISCHARGE " + pieceSelectedPos);
+							numberOfPieces[pieceSelectedPos]--;
+							if(numberOfPieces[pieceSelectedPos]==0){
+								board[pieceSelectedPos]=null;
+							}
 						}
 					}else if(command.startsWith("WIN")){
 						output.println("YOU_WIN");
