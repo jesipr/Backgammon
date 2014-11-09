@@ -334,7 +334,7 @@ class Game {
 							else if(board[blackTrail[j+diceOptions.get(i)]]==player && numberOfPieces[blackTrail[j+diceOptions.get(i)]]<5) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
 							else if(board[blackTrail[j+diceOptions.get(i)]]==player.opponent && numberOfPieces[blackTrail[j+diceOptions.get(i)]]==1) possibleMoves.add(blackTrail[j+diceOptions.get(i)]);
 						}
-					}catch(NullPointerException e){
+					}catch(RuntimeException e){
 						int count = 0;
 						for(int k = 18;k<blackTrail.length;k++){
 							if(blackTrail[k]<location && board[blackTrail[k]]==player ){

@@ -125,7 +125,7 @@ public class BoardClient {
 									.toString(posMov.charAt(i)));
 						} else {
 							BoardClient.posMov
-									.add(Integer.parseInt(tempPosMov));
+							.add(Integer.parseInt(tempPosMov));
 							tempPosMov = "";
 						}
 					}
@@ -198,10 +198,10 @@ public class BoardClient {
 					if (!(BoardViewer.pieces[opMovesInt.get(0)].getColor()
 							.equals(BoardViewer.pieces[opMovesInt.get(1)]
 									.getColor()))
-							&& !(BoardViewer.pieces[opMovesInt.get(0)]
-									.getColor().equals(""))
-							&& !(BoardViewer.pieces[opMovesInt.get(1)]
-									.getColor().equals(""))) {
+									&& !(BoardViewer.pieces[opMovesInt.get(0)]
+											.getColor().equals(""))
+											&& !(BoardViewer.pieces[opMovesInt.get(1)]
+													.getColor().equals(""))) {
 
 						if (BoardViewer.pieces[opMovesInt.get(1)].getColor()
 								.equals("black")) {
@@ -253,7 +253,7 @@ public class BoardClient {
 					BoardViewer.pieces[from]
 							.setStoneNum(BoardViewer.pieces[from].getStoneNum() - 1);
 					BoardViewer.repaintButtons();
-					
+
 				}
 
 			}
