@@ -12,7 +12,7 @@ public class RHListener implements MouseListener {
 			BoardClient.out.println("ROLL");
 		} else if (b.getToolTipText().startsWith("DISCHARGE")) {
 			String tempHouse = b.getToolTipText().substring(11);
-			BoardClient.out.print("DISCHARGE");
+			BoardClient.out.println("DISCHARGE");
 			
 			if (tempHouse.equals("WHITE")) {
 				BoardHouse.hW++;

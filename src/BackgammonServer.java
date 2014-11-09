@@ -719,6 +719,8 @@ class Game {
 
 								}
 								else{
+									this.output.println("NO_MOVES");
+									this.opponent.output.println("OPPONENT_NO_MOVES");
 									changeTurn(this);
 								}
 
