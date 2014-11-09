@@ -214,7 +214,7 @@ public class BoardClient {
 					BoardViewer.repaintButtons();
 
 				} else if (response.startsWith("OPPONENT_VALID_DISCHARGE")) {
-					int disLoc = Integer.parseInt(response.substring(16));
+					int disLoc = Integer.parseInt(response.substring(25));
 
 					BoardViewer.pieces[disLoc].setStoneNum(BoardViewer.pieces[disLoc].getStoneNum() - 1);
 
