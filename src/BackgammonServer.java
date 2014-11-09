@@ -336,7 +336,7 @@ class Game {
 					}
 				}
 				if(blackTrail[24-diceOptions.get(i)]==location){
-					possibleMoves.add(26);
+					possibleMoves.add(27);
 				}
 
 			}
