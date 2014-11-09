@@ -150,7 +150,7 @@ public class BoardClient {
 									.toString(posMov.charAt(i)));
 						} else {
 							BoardClient.posMov
-									.add(Integer.parseInt(tempPosMov));
+							.add(Integer.parseInt(tempPosMov));
 							tempPosMov = "";
 						}
 					}
@@ -204,7 +204,23 @@ public class BoardClient {
 					}
 					BoardViewer.repaintButtons();
 
+				} else if (response.startsWith("VALID_DISCHARGE")) {
+					int disLoc = Integer.parseInt(response.substring(16));
+
+					BoardViewer.pieces[disLoc]
+							.setStoneNum(BoardViewer.pieces[disLoc]
+									.getStoneNum() - 1);
+
+					BoardViewer.repaintButtons();
+
+				} else if (response.startsWith("OPPONENT_VALID_DISCHARGE")) {
+					int disLoc = Integer.parseInt(response.substring(16));
+
+					BoardViewer.pieces[disLoc].setStoneNum(BoardViewer.pieces[disLoc].getStoneNum() - 1);
+
+					BoardViewer.repaintButtons();
 				} else if (response.startsWith("OPPONENT_MOVED")) {
+
 					String opMoves = response.substring(15);
 					String tempPosMov = "";
 					ArrayList<Integer> opMovesInt = new ArrayList<Integer>();
@@ -223,10 +239,10 @@ public class BoardClient {
 					if (!(BoardViewer.pieces[opMovesInt.get(0)].getColor()
 							.equals(BoardViewer.pieces[opMovesInt.get(1)]
 									.getColor()))
-							&& !(BoardViewer.pieces[opMovesInt.get(0)]
-									.getColor().equals(""))
-							&& !(BoardViewer.pieces[opMovesInt.get(1)]
-									.getColor().equals(""))) {
+									&& !(BoardViewer.pieces[opMovesInt.get(0)]
+											.getColor().equals(""))
+											&& !(BoardViewer.pieces[opMovesInt.get(1)]
+													.getColor().equals(""))) {
 
 						if (BoardViewer.pieces[opMovesInt.get(1)].getColor()
 								.equals("black")) {
@@ -279,15 +295,15 @@ public class BoardClient {
 							.setStoneNum(BoardViewer.pieces[from].getStoneNum() - 1);
 					BoardViewer.repaintButtons();
 
-				} else if (response.startsWith("YOU_WIN")) {     
-					bH.updateScore(BoardHeader.score1++, 0);	// El Servidor recibe comando: "WIN", el cliente debe recibir un comando "YOU_WIN"//
-					bH.setText("Player 1:" + BoardHeader.score1 + " pts"  //Al igual que un comando: "OPPONENT_WIN" //
+				} else if (response.startsWith("YOU_WIN")) {
+					bH.updateScore(BoardHeader.score1++, 0); 
+					bH.setText("Player 1:" + BoardHeader.score1 + " pts" 
 							+ "  Player 2:" + BoardHeader.score2 + " pts");
 					BoardViewer.removeBorderButtons();
 					BoardViewer.resetDices();
 					BoardViewer.resetButtons();
-					if (BoardHeader.score1 == BoardHouse.mP) { //MAXIMUM POINTS, solo verifico el score1 porque ese es el que importa cuando va a ganar la totalidad
-						BoardClient.out.println("WIN_GAME");   // del juego. Si gana te envie un WIN_GAME, LEER MAS ABAJO EL OTRO COMENTARIO>>>>>//
+					if (BoardHeader.score1 == BoardHouse.mP) { 
+						BoardClient.out.println("WIN_GAME"); 
 					}
 
 				} else if (response.startsWith("OPPONENT_WIN")) {
@@ -297,21 +313,23 @@ public class BoardClient {
 					BoardViewer.removeBorderButtons();
 					BoardViewer.resetDices();
 					BoardViewer.resetButtons();
-					
-				} else if(response.startsWith("WIN_GAME")){   // El servidor recibe un comando : "WIN_GAME" significa que el jugador gano la totalidad de los puntos//
-					JOptionPane.showMessageDialog(frame, "Congratulations! You Won!",  // El Servidor me envia un comando de "WIN_GAME" y "OPPONENT_WIN_GAME"//
+
+				} else if (response.startsWith("WIN_GAME")) { 
+					JOptionPane.showMessageDialog(
+							frame,
+							"Congratulations! You Won!", 
 							"!!!!!!!!", JOptionPane.INFORMATION_MESSAGE,
 							new ImageIcon("src/no_moves.png"));
 					frame.dispose();
 					s.close();
-					
-				} else if(response.startsWith("OPPONENT_WIN_GAME")){
-					JOptionPane.showMessageDialog(frame, "You Lose!",
-							":(", JOptionPane.INFORMATION_MESSAGE,
-							new ImageIcon("src/no_moves.png"));
+
+				} else if (response.startsWith("OPPONENT_WIN_GAME")) {
+					JOptionPane.showMessageDialog(frame, "You Lose!", ":(",
+							JOptionPane.INFORMATION_MESSAGE, new ImageIcon(
+									"src/no_moves.png"));
 					frame.dispose();
 					s.close();
-					
+
 				}
 
 			}
