@@ -589,10 +589,10 @@ class Game {
 
 		public void removeDischargeRoll(int location){
 			if(this.mark=='W'){
-				
+
 
 				for(int i=0;i<diceOptions.size();i++){
-					
+
 					if(whiteTrail[24-diceOptions.get(i)]==location){
 						diceOptions.remove(i);
 						break;
@@ -604,7 +604,7 @@ class Game {
 			}else if(this.mark=='B'){
 
 				for(int i=0;i<diceOptions.size();i++){
-					
+
 					if(blackTrail[24-diceOptions.get(i)]==location){
 						diceOptions.remove(i);
 						break;
@@ -746,98 +746,103 @@ class Game {
 								houseConditionMoves(this,location);
 								continue;
 							}
+							else if(anyMoveLeft(this)){
+								pieceSelectedPos = location;
+								alreadySelect = true;
 
-							pieceSelectedPos = location;
-							alreadySelect = true;
+								// Make calculations of possible moves locations
+								// with the array of dice
+								// and get the user mark to know which array trail
+								// to use. Send this locations to the output.
 
-							// Make calculations of possible moves locations
-							// with the array of dice
-							// and get the user mark to know which array trail
-							// to use. Send this locations to the output.
-
-							if (this.mark == 'W') {
-								for (int i = 0; i < diceOptions.size(); i++) {
-									for (int j = 0; j < whiteTrail.length; j++) { 
-										if (j + diceOptions.get(i) < 24) {
-											if (whiteTrail[j] == location) {
-												if (board[whiteTrail[j
-												                     + diceOptions.get(i)]] == this
-												                     && numberOfPieces[whiteTrail[j
-												                                                  + diceOptions
-												                                                  .get(i)]] < 5) {
-													possibleMoves
-													.add(whiteTrail[j
-													                + diceOptions
-													                .get(i)]);
-												} else if (board[whiteTrail[j
-												                            + diceOptions.get(i)]] == null) {
-													possibleMoves
-													.add(whiteTrail[j
-													                + diceOptions
-													                .get(i)]);
-												} else if ((board[whiteTrail[j
-												                             + diceOptions.get(i)]] == this.opponent && numberOfPieces[whiteTrail[j
-												                                                                                                  + diceOptions.get(i)]] == 1)) {
-													possibleMoves
-													.add(whiteTrail[j
-													                + diceOptions
-													                .get(i)]);
+								if (this.mark == 'W') {
+									for (int i = 0; i < diceOptions.size(); i++) {
+										for (int j = 0; j < whiteTrail.length; j++) { 
+											if (j + diceOptions.get(i) < 24) {
+												if (whiteTrail[j] == location) {
+													if (board[whiteTrail[j
+													                     + diceOptions.get(i)]] == this
+													                     && numberOfPieces[whiteTrail[j
+													                                                  + diceOptions
+													                                                  .get(i)]] < 5) {
+														possibleMoves
+														.add(whiteTrail[j
+														                + diceOptions
+														                .get(i)]);
+													} else if (board[whiteTrail[j
+													                            + diceOptions.get(i)]] == null) {
+														possibleMoves
+														.add(whiteTrail[j
+														                + diceOptions
+														                .get(i)]);
+													} else if ((board[whiteTrail[j
+													                             + diceOptions.get(i)]] == this.opponent && numberOfPieces[whiteTrail[j
+													                                                                                                  + diceOptions.get(i)]] == 1)) {
+														possibleMoves
+														.add(whiteTrail[j
+														                + diceOptions
+														                .get(i)]);
+													}
 												}
 											}
 										}
 									}
-								}
-								String temp = "POSSIBLE_MOVES ";
-								for (int i = 0; i < possibleMoves.size(); i++) {
-									temp = temp.concat(Integer
-											.toString(possibleMoves.get(i))
-											+ ",");
-								}
-								output.println(temp);
-							} else {
-								for (int i = 0; i < diceOptions.size(); i++) {
-									for (int j = 0; j < blackTrail.length; j++) {
-										if (j + diceOptions.get(i) < 24) {
-											if (blackTrail[j] == location
-													&& blackTrail[j
-													              + diceOptions
-													              .get(i)] < 26) {
-												if (board[blackTrail[j
-												                     + diceOptions.get(i)]] == this
-												                     && numberOfPieces[blackTrail[j
-												                                                  + diceOptions
-												                                                  .get(i)]] < 5) {
-													possibleMoves
-													.add(blackTrail[j
-													                + diceOptions
-													                .get(i)]);
-												} else if (board[blackTrail[j
-												                            + diceOptions.get(i)]] == null) {
-													possibleMoves
-													.add(blackTrail[j
-													                + diceOptions
-													                .get(i)]);
-												} else if ((board[blackTrail[j
-												                             + diceOptions.get(i)]] == this.opponent && numberOfPieces[blackTrail[j
-												                                                                                                  + diceOptions.get(i)]] == 1)) {
-													possibleMoves
-													.add(blackTrail[j
-													                + diceOptions
-													                .get(i)]);
+									String temp = "POSSIBLE_MOVES ";
+									for (int i = 0; i < possibleMoves.size(); i++) {
+										temp = temp.concat(Integer
+												.toString(possibleMoves.get(i))
+												+ ",");
+									}
+									output.println(temp);
+								} else {
+									for (int i = 0; i < diceOptions.size(); i++) {
+										for (int j = 0; j < blackTrail.length; j++) {
+											if (j + diceOptions.get(i) < 24) {
+												if (blackTrail[j] == location
+														&& blackTrail[j
+														              + diceOptions
+														              .get(i)] < 26) {
+													if (board[blackTrail[j
+													                     + diceOptions.get(i)]] == this
+													                     && numberOfPieces[blackTrail[j
+													                                                  + diceOptions
+													                                                  .get(i)]] < 5) {
+														possibleMoves
+														.add(blackTrail[j
+														                + diceOptions
+														                .get(i)]);
+													} else if (board[blackTrail[j
+													                            + diceOptions.get(i)]] == null) {
+														possibleMoves
+														.add(blackTrail[j
+														                + diceOptions
+														                .get(i)]);
+													} else if ((board[blackTrail[j
+													                             + diceOptions.get(i)]] == this.opponent && numberOfPieces[blackTrail[j
+													                                                                                                  + diceOptions.get(i)]] == 1)) {
+														possibleMoves
+														.add(blackTrail[j
+														                + diceOptions
+														                .get(i)]);
+													}
 												}
 											}
 										}
 									}
+									String temp = "POSSIBLE_MOVES ";
+									for (int i = 0; i < possibleMoves.size(); i++) {
+										temp = temp.concat(Integer
+												.toString(possibleMoves.get(i))
+												+ ",");
+									}
+									output.println(temp);
 								}
-								String temp = "POSSIBLE_MOVES ";
-								for (int i = 0; i < possibleMoves.size(); i++) {
-									temp = temp.concat(Integer
-											.toString(possibleMoves.get(i))
-											+ ",");
-								}
-								output.println(temp);
+								output.println("VALID_SELECT");
+							}else{
+								this.output.println("NO_MOVES");
+								this.opponent.output.println("OPPONENT_NO_MOVES");
+								changeTurn(this);
 							}
-							output.println("VALID_SELECT");
 						} else if(incorrectPiece(location,this)){ //Check if it chose a opponent dice.
 							output.println("MESSAGE Choose a correct piece!");
 						}else{
