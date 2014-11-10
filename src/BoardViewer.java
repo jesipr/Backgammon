@@ -169,8 +169,11 @@ public class BoardViewer extends JPanel {
 					pieces[i].setIcon(null);
 					pieces[i].setColor(B);
 					pieces[i].setStoneNum(0);
-				} else
+				} else {
 					pieces[i].setColor("");
+					pieces[i].setStoneNum(0);
+					pieces[i].setIcon(null);
+				}
 			}
 		}
 	}

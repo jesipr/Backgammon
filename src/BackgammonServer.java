@@ -114,7 +114,7 @@ class Game {
 	 * The current player state.
 	 */
 	Player currentPlayer;
-	
+
 	/**
 	 * Indicates the position of the selected piece.
 	 */
@@ -321,7 +321,7 @@ class Game {
 			while(whiteTrail[k]<location){
 				if(board[whiteTrail[k]]==player){
 					count++;
-					
+
 				}
 				k++;
 				enter = true;
@@ -586,18 +586,30 @@ class Game {
 			}
 
 		}
-		
+
 		public void removeDischargeRoll(int location){
 			if(this.mark=='W'){
+				
+
 				for(int i=0;i<diceOptions.size();i++){
+					
 					if(whiteTrail[24-diceOptions.get(i)]==location){
+						diceOptions.remove(i);
+						break;
+					} else if(location+diceOptions.get(i)>=26){
 						diceOptions.remove(i);
 						break;
 					}
 				}
 			}else if(this.mark=='B'){
+
 				for(int i=0;i<diceOptions.size();i++){
+					
 					if(blackTrail[24-diceOptions.get(i)]==location){
+						diceOptions.remove(i);
+						break;
+					}
+					else if(location+diceOptions.get(i) >= 13){
 						diceOptions.remove(i);
 						break;
 					}
@@ -607,7 +619,7 @@ class Game {
 			for (int i = 0; i < diceOptions.size(); i++) {
 				temp = temp + diceOptions.get(i);
 			}
-			
+
 			if (temp.length() == 1) {
 				output.println("VALID_ROLL " + temp + "000");
 				this.opponent.output.println("OPPONENT_ROLL " + temp + "000");
@@ -719,7 +731,7 @@ class Game {
 
 								}
 								else{
-									this.output.println("NO_MOVES");
+									output.println("NO_MOVES");
 									this.opponent.output.println("OPPONENT_NO_MOVES");
 									changeTurn(this);
 								}
@@ -841,7 +853,7 @@ class Game {
 						} else {
 							output.println("MESSAGE ?");
 						}
-						
+
 					} else if (command.startsWith("QUIT")) {
 						return;
 					}
@@ -853,6 +865,7 @@ class Game {
 							if(numberOfPieces[pieceSelectedPos]==0){
 								board[pieceSelectedPos]=null;
 							}
+
 							//Update roll missing
 							removeDischargeRoll(pieceSelectedPos);
 						}
@@ -860,11 +873,11 @@ class Game {
 						output.println("YOU_WIN");
 						this.opponent.output.println("OPPONENT_WIN");
 						initGameBoard();
-						
+
 					}
-					else if(command.startsWith("WIN_GAME")){
-						output.println("WIN_GAME");
-						this.opponent.output.println("OPPONENT_WIN_GAME");
+					else if(command.startsWith("WON_GAME")){
+						output.println("WON_GAME");
+						this.opponent.output.println("OPPONENT_WON_GAME");
 					}
 				}
 			} catch (IOException e) {

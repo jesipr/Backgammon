@@ -302,8 +302,10 @@ public class BoardClient {
 					BoardViewer.removeBorderButtons();
 					BoardViewer.resetDices();
 					BoardViewer.resetButtons();
+					
+					
 					if (BoardHeader.score1 == BoardHouse.mP) { 
-						BoardClient.out.println("WIN_GAME"); 
+						BoardClient.out.println("WON_GAME"); 
 					}
 
 				} else if (response.startsWith("OPPONENT_WIN")) {
@@ -314,7 +316,7 @@ public class BoardClient {
 					BoardViewer.resetDices();
 					BoardViewer.resetButtons();
 
-				} else if (response.startsWith("WIN_GAME")) { 
+				} else if (response.startsWith("WON_GAME")) { 
 					JOptionPane.showMessageDialog(
 							frame,
 							"Congratulations! You Won!", 
@@ -323,7 +325,7 @@ public class BoardClient {
 					frame.dispose();
 					s.close();
 
-				} else if (response.startsWith("OPPONENT_WIN_GAME")) {
+				} else if (response.startsWith("OPPONENT_WON_GAME")) {
 					JOptionPane.showMessageDialog(frame, "You Lose!", ":(",
 							JOptionPane.INFORMATION_MESSAGE, new ImageIcon(
 									"src/no_moves.png"));
