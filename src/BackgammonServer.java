@@ -84,10 +84,6 @@ class Game {
 	/**
 	 * Gets called whenever a player makes a move in the client board. This
 	 * change the current status of the server board to reflect the change.
-	 * 
-	 * @param from
-	 * @param to
-	 * @param player
 	 */
 	public void updateBoard(int from, int to, Player player) {
 		numberOfPieces[from]--;
@@ -312,6 +308,7 @@ class Game {
 				}
 				if(whiteTrail[24-diceOptions.get(i)]==location){
 					possibleMoves.add(26);
+					
 				}
 
 			}
