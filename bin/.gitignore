@@ -1,3 +1,10 @@
+/BoardClient.class
+/BoardHeader.class
+/BoardHouse.class
+/BoardStatus.class
+/BoardViewer.class
+/CheckerListener.class
+/JChecker.class
 /MenuListener.class
 /RHListener.class
 /background.png
@@ -11,12 +18,5 @@
 /statusBar.png
 /whiteHouse.png
 /BackgammonServer.class
-/BoardClient.class
-/BoardHeader.class
-/BoardHouse.class
-/BoardStatus.class
-/BoardViewer.class
-/CheckerListener.class
 /Game$Player.class
 /Game.class
-/JChecker.class

@@ -71,6 +71,7 @@ public class BoardViewer extends JPanel {
 		for (int i = 0; i < 26; i++) {
 			pieces[i] = new JChecker(i, 0);
 			pieces[i].setBorderPainted(false);
+			pieces[i].setContentAreaFilled(false);
 			pieces[i].addMouseListener(cL);
 			pieces[i].setToolTipText(Integer.toString(i));
 			pieces[i].setFont(new Font(Font.SERIF, Font.BOLD, 0));
