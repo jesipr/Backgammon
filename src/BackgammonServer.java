@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * A server for a network multi player Backgammon game.
+ * A server for a network multiple player Backgammon game.
  * It allows an unlimited number of pairs of players to play.
  */
 public class BackgammonServer {
@@ -586,8 +586,6 @@ class Game {
 
 		public void removeDischargeRoll(int location){
 			if(this.mark=='W'){
-
-
 				for(int i=0;i<diceOptions.size();i++){
 
 					if(whiteTrail[24-diceOptions.get(i)]==location){
